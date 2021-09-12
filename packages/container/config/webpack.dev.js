@@ -3,23 +3,28 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
-const domain = process.env.PRODUCTION_DOMAIN;
+const port = 8080;
 
-const prodConfig = {
-  mode: 'production',
+const devConfig = {
+  mode: 'development',
   output: {
-    filename: '[name].[contenthash].js',
-    publicPath: '/orchestrator/latest/'
+    publicPath: `http://localhost:${port}/`,
+    sourceMapFilename: '[name].js.map'
+  },
+  devtool: 'source-map',
+  devServer: {
+    port,
+    historyApiFallback: true
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'orchestrator',
+      name: 'container',
       remotes: {
-        dashboard: `dashboard@${domain}/dashboard/latest/remoteEntry.js`
+        dashboard: 'dashboard@http://localhost:8081/remoteEntry.js'
       },
       shared: packageJson.dependencies
     })
   ]
 };
 
-module.exports = merge(commonConfig, prodConfig);
+module.exports = merge(commonConfig, devConfig);

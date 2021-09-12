@@ -1,9 +1,9 @@
 # Monthly Bills
 
 ```
-Orchestrator - http://localhost:8080
+Container - http://localhost:8080
 
-cd orchestrator
+cd container
 npm install
 npm start
 ```

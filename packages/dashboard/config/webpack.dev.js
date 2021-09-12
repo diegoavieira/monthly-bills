@@ -1,9 +1,10 @@
 const { merge } = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 const commonConfig = require('./webpack.common');
 const packageJson = require('../package.json');
 
-const port = 8080;
+const port = 8081;
 
 const devConfig = {
   mode: 'development',
@@ -18,11 +19,16 @@ const devConfig = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'orchestrator',
-      remotes: {
-        dashboard: 'dashboard@http://localhost:8081/remoteEntry.js'
+      name: 'dashboard',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './DashboardApp': './src/bootstrap'
       },
       shared: packageJson.dependencies
+    }),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+      favicon: './public/favicon.ico'
     })
   ]
 };
