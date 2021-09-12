@@ -5,12 +5,12 @@ import { StylesProvider, createGenerateClassName } from '@material-ui/core/style
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 
 const generateClassName = createGenerateClassName({
-  productionPrefix: 'mbds'
+  productionPrefix: 'das'
 });
 
 const App = ({ history }) => (
-  <Router history={history}>
-    <StylesProvider generateClassName={generateClassName}>
+  <StylesProvider generateClassName={generateClassName}>
+    <Router history={history}>
       <Suspense fallback="Loading...">
         <Switch>
           <Route exact path="/">
@@ -18,8 +18,8 @@ const App = ({ history }) => (
           </Route>
         </Switch>
       </Suspense>
-    </StylesProvider>
-  </Router>
+    </Router>
+  </StylesProvider>
 );
 
 export default App;

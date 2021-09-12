@@ -7,14 +7,14 @@ import { createBrowserHistory } from 'history';
 const DashboardApp = lazy(() => import('./apps/DashboardApp'));
 
 const generateClassName = createGenerateClassName({
-  productionPrefix: 'mbco'
+  productionPrefix: 'con'
 });
 
 const history = createBrowserHistory();
 
 const App = () => (
-  <Router history={history}>
-    <StylesProvider generateClassName={generateClassName}>
+  <StylesProvider generateClassName={generateClassName}>
+    <Router history={history}>
       <Suspense fallback="Loading...">
         <Switch>
           <Route exact path="/">
@@ -22,8 +22,8 @@ const App = () => (
           </Route>
         </Switch>
       </Suspense>
-    </StylesProvider>
-  </Router>
+    </Router>
+  </StylesProvider>
 );
 
 export default App;
