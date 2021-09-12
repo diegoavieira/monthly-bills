@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createMemoryHistory, createBrowserHistory } from 'history';
 import App from './App';
 

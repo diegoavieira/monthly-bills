@@ -1,7 +1,6 @@
 import React, { lazy, Suspense } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createBrowserHistory } from 'history';
 
 const DashboardApp = lazy(() => import('./apps/DashboardApp'));
