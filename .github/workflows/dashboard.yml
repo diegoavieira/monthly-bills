@@ -1,17 +1,17 @@
-name: deploy-dashboard
+name: dashboard
 
 on:
   push:
     branches:
       - master
     paths:
-      - "dashboard/**"
+      - "packages/dashboard/**"
 
   workflow_dispatch:
 
 defaults:
   run:
-    working-directory: dashboard
+    working-directory: packages/dashboard
 
 jobs:
   build:
