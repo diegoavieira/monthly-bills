@@ -1,17 +1,13 @@
 import React from 'react';
-import { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';
-import MbToolbar from '@components/MbToolbar';
+import { MbToolbar } from '@components';
 import AppRouter from './App.router';
-
-const generateClassName = createGenerateClassName({
-  productionPrefix: 'con'
-});
+import AppTheme from './App.theme';
 
 const App = () => (
-  <StylesProvider generateClassName={generateClassName}>
+  <AppTheme>
     <MbToolbar title="Contas Mensais" fixed />
     <AppRouter />
-  </StylesProvider>
+  </AppTheme>
 );
 
 export default App;

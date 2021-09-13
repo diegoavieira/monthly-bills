@@ -1,12 +1,6 @@
 import React from 'react';
-import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core';
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1
-  },
-  fixed: theme.mixins.toolbar
-}));
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { useStyles } from './MbToolbar.styles';
 
 const MbToolbar = ({ title, fixed, color }) => {
   const classes = useStyles();

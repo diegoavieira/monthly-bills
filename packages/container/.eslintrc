@@ -17,6 +17,7 @@
     "react/jsx-props-no-spreading": [1, { "custom": "ignore" }],
     "no-console": "off",
     "import/no-unresolved": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "import/prefer-default-export": "off"
   }
 }
