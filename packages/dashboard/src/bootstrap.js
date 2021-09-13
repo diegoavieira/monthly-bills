@@ -24,7 +24,7 @@ const mount = (el, { onNavigate, defaultHistory, initialPath }) => {
 };
 
 if (process.env.NODE_ENV === 'development') {
-  const devRoot = document.querySelector('#root');
+  const devRoot = document.querySelector('#root-dashboard');
 
   if (devRoot) {
     mount(devRoot, { defaultHistory: createBrowserHistory() });
