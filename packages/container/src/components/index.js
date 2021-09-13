@@ -1,3 +1,3 @@
-import MbToolbar from './MbToolbar/MbToolbar';
+import MbHeader from './MbHeader/MbHeader';
 
-export { MbToolbar };
+export { MbHeader };

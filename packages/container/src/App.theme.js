@@ -5,13 +5,7 @@ const generateClassName = createGenerateClassName({
   productionPrefix: 'con'
 });
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#f8f8dd'
-    }
-  }
-});
+const theme = createTheme({});
 
 const AppTheme = ({ children }) => (
   <ThemeProvider theme={theme}>

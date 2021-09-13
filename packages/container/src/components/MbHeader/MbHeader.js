@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { useStyles } from './MbToolbar.styles';
+import { useStyles } from './MbHeader.styles';
 
-const MbToolbar = ({ title, fixed, color }) => {
+const MbHeader = ({ title, fixed, color }) => {
   const classes = useStyles();
 
   return (
@@ -19,4 +19,4 @@ const MbToolbar = ({ title, fixed, color }) => {
   );
 };
 
-export default MbToolbar;
+export default MbHeader;
