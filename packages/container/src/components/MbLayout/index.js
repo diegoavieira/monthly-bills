@@ -3,10 +3,10 @@ import { makeStyles } from '@material-ui/core';
 import MbToolbar from '../MbToolbar';
 
 const useStyles = makeStyles((theme) => ({
-  main: {
+  container: {
     display: 'flex',
-    background: theme.palette.background.default,
-    overflowY: 'auto',
+    background: theme.palette.secondary.light,
+    overflow: 'auto',
     '@media (min-width: 0px) and (orientation: landscape)': {
       height: 'calc(100vh - 48px)'
     },
@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
     height: 'calc(100vh - 56px)'
   },
-  section: {
+  main: {
     width: '100%'
   }
 }));
@@ -26,9 +26,10 @@ const MbLayout = ({ children, title }) => {
   return (
     <>
       <MbToolbar title={title} />
-      <main className={classes.main}>
-        <section className={classes.section}>{children}</section>
-      </main>
+      <div className={classes.container}>
+        {/* <Sidenav /> */}
+        <main className={classes.main}>{children}</main>
+      </div>
     </>
   );
 };
