@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   module: {
@@ -31,5 +32,10 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/favicon.ico'
     })
-  ]
+  ],
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, '../src/components')
+    }
+  }
 };
