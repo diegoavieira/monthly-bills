@@ -3,7 +3,7 @@
 ```
 Container - http://localhost:8080
 
-cd container
+cd packages/container/
 npm install
 npm start
 ```
@@ -11,7 +11,7 @@ npm start
 ```
 Dashboard - http://localhost:8081
 
-cd dashboard
+cd packages/dashboard/
 npm install
 npm start
 ```

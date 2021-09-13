@@ -14,8 +14,8 @@ const history = createBrowserHistory();
 
 const App = () => (
   <StylesProvider generateClassName={generateClassName}>
-    <MbLayout title="Contas Mensais">
-      <Router history={history}>
+    <Router history={history}>
+      <MbLayout title="Contas Mensais">
         <Suspense fallback="Loading...">
           <Switch>
             <Route exact path="/">
@@ -23,8 +23,8 @@ const App = () => (
             </Route>
           </Switch>
         </Suspense>
-      </Router>
-    </MbLayout>
+      </MbLayout>
+    </Router>
   </StylesProvider>
 );
 

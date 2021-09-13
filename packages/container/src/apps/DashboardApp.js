@@ -31,8 +31,6 @@ const DashboardApp = () => {
       .catch(() => {
         setErrorLoading('Error Loading');
       });
-
-    return () => {};
   }, []);
 
   return <div ref={ref}>{errorLoading}</div>;
