@@ -1,11 +1,11 @@
 import React from 'react';
-import { MbHeader } from '@components';
+import { RdsHeader } from '@rdsystem/common';
 import AppRouter from './App.router';
 import AppTheme from './App.theme';
 
 const App = () => (
   <AppTheme>
-    <MbHeader title="Contas Mensais" fixed />
+    <RdsHeader title="Contas Mensais" fixed />
     <AppRouter />
   </AppTheme>
 );
