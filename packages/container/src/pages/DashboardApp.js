@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import loadRemoteApp from '../utils/loadRemoteApp';
 
-const mountPromise = import('dashboard/DashboardApp');
+const remoteApp = loadRemoteApp('dashboard', './DashboardApp');
 
 const DashboardApp = () => {
   const ref = useRef(null);
@@ -11,7 +12,7 @@ const DashboardApp = () => {
   useEffect(() => {
     setErrorLoading('');
 
-    mountPromise
+    remoteApp()
       .then((res) => {
         const mount = res.default;
 
