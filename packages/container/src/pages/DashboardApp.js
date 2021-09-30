@@ -2,12 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useDynamicScript from '../hooks/useDynamicScript';
 import loadRemoteApp from '../utils/loadRemoteApp';
+import environments from '../environments.json';
 
 const DashboardApp = () => {
   const ref = useRef(null);
   const history = useHistory();
 
-  const [ready, failed] = useDynamicScript('http://localhost:8081/remoteEntry.js');
+  const [ready, failed] = useDynamicScript(environments[window.location.hostname].dashboard);
 
   useEffect(() => {
     if (ready) {
