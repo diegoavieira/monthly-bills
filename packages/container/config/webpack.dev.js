@@ -19,9 +19,6 @@ const devConfig = {
   plugins: [
     new ModuleFederationPlugin({
       name: 'container',
-      remotes: {
-        dashboard: 'dashboard'
-      },
       shared: packageJson.dependencies
     })
   ]

@@ -1,19 +1,19 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import useDynamicScript from '../hooks/useDynamicScript';
 import loadRemoteApp from '../utils/loadRemoteApp';
-
-const remoteApp = loadRemoteApp('dashboard', './DashboardApp');
 
 const DashboardApp = () => {
   const ref = useRef(null);
   const history = useHistory();
-  const [errorLoading, setErrorLoading] = useState('');
+
+  const [ready, failed] = useDynamicScript('http://localhost:8081/remoteEntry.js');
 
   useEffect(() => {
-    setErrorLoading('');
+    if (ready) {
+      const remoteApp = loadRemoteApp('dashboard', './DashboardApp');
 
-    remoteApp()
-      .then((res) => {
+      remoteApp().then((res) => {
         const mount = res.default;
 
         const { onParentNavigate } = mount(ref.current, {
@@ -28,13 +28,19 @@ const DashboardApp = () => {
         });
 
         history.listen(onParentNavigate);
-      })
-      .catch(() => {
-        setErrorLoading('Error Loading');
       });
-  }, []);
+    }
+  }, [ready]);
 
-  return <div ref={ref}>{errorLoading}</div>;
+  if (!ready && !failed) {
+    return <div>Loading...</div>;
+  }
+
+  if (failed && !ready) {
+    return <div>Error</div>;
+  }
+
+  return <div ref={ref} />;
 };
 
 export default DashboardApp;
