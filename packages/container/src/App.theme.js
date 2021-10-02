@@ -2,7 +2,8 @@ import React from 'react';
 import { StylesProvider, createGenerateClassName, ThemeProvider, createTheme } from '@material-ui/core/styles';
 
 const generateClassName = createGenerateClassName({
-  productionPrefix: 'con'
+  productionPrefix: 'con',
+  seed: 'Con'
 });
 
 const theme = createTheme({});

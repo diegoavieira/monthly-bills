@@ -10,7 +10,7 @@
   "dependencies": {
     "@material-ui/core": "^4.12.2",
     "@material-ui/icons": "^4.11.2",
-    "@rdsystem/common": "0.0.13",
+    "@rdsystem/common": "0.0.33",
     "history": "^5.0.1",
     "html-webpack-plugin": "^4.5.0",
     "react": "^17.0.1",
