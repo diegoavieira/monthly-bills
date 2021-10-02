@@ -1,18 +1,20 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-
-const mountPromise = import('dashboard/DashboardApp');
+import useDynamicScript from '../hooks/useDynamicScript';
+import getEnv from '../utils/getEnv';
+import getRemoteApp from '../utils/getRemoteApp';
 
 const DashboardApp = () => {
   const ref = useRef(null);
   const history = useHistory();
-  const [errorLoading, setErrorLoading] = useState('');
+  const dashboard = getEnv('dashboard');
+  const [ready, failed] = useDynamicScript(dashboard);
 
   useEffect(() => {
-    setErrorLoading('');
+    if (ready) {
+      const remoteApp = getRemoteApp('dashboard', './DashboardApp');
 
-    mountPromise
-      .then((res) => {
+      remoteApp().then((res) => {
         const mount = res.default;
 
         const { onParentNavigate } = mount(ref.current, {
@@ -27,13 +29,19 @@ const DashboardApp = () => {
         });
 
         history.listen(onParentNavigate);
-      })
-      .catch(() => {
-        setErrorLoading('Error Loading');
       });
-  }, []);
+    }
+  }, [ready]);
 
-  return <div ref={ref}>{errorLoading}</div>;
+  if (!ready && !failed) {
+    return <div>Loading...</div>;
+  }
+
+  if (failed && !ready) {
+    return <div>Error</div>;
+  }
+
+  return <div ref={ref} />;
 };
 
 export default DashboardApp;
