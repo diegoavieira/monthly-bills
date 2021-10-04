@@ -15,3 +15,11 @@ cd packages/dashboard/
 npm install
 npm start
 ```
+
+```
+Account - http://localhost:8082/account
+
+cd packages/account/
+npm install
+npm start
+```
