@@ -1,5 +1,3 @@
-/* eslint-disable consistent-return */
-
 import { useEffect, useState } from 'react';
 
 const useDynamicScript = (url) => {
@@ -7,36 +5,35 @@ const useDynamicScript = (url) => {
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
-    if (!url) {
-      return;
-    }
+    const hasElement = document.getElementById(url);
 
-    const element = document.createElement('script');
+    if (!hasElement) {
+      const element = document.createElement('script');
 
-    element.src = url;
-    element.type = 'text/javascript';
-    element.async = true;
+      element.src = url;
+      element.id = url;
+      element.type = 'text/javascript';
+      element.async = true;
 
-    setReady(false);
-    setFailed(false);
-
-    element.onload = () => {
-      setReady(true);
-    };
-
-    element.onerror = () => {
       setReady(false);
-      setFailed(true);
-    };
+      setFailed(false);
 
-    document.head.appendChild(element);
+      element.onload = () => {
+        setReady(true);
+      };
 
-    return () => {
-      document.head.removeChild(element);
-    };
+      element.onerror = () => {
+        setReady(false);
+        setFailed(true);
+      };
+
+      document.head.appendChild(element);
+    } else {
+      setReady(true);
+    }
   }, [url]);
 
-  return [ready, failed];
+  return { ready, failed };
 };
 
 export default useDynamicScript;

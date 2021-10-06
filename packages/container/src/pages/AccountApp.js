@@ -8,28 +8,32 @@ const AccountApp = () => {
   const ref = useRef(null);
   const history = useHistory();
   const account = getEnv('account');
-  const [ready, failed] = useDynamicScript(account);
+  const { ready, failed } = useDynamicScript(account);
 
   useEffect(() => {
     if (ready) {
       const remoteApp = getRemoteApp('account', './AccountApp');
 
-      remoteApp().then((res) => {
-        const mount = res.default;
+      remoteApp()
+        .then((res) => {
+          const mount = res.default;
 
-        const { onParentNavigate } = mount(ref.current, {
-          initialPath: history.location.pathname,
-          onNavigate: ({ pathname: nextPathname }) => {
-            const { pathname } = history.location;
+          const { onParentNavigate } = mount(ref.current, {
+            initialPath: history.location.pathname,
+            onNavigate: ({ pathname: nextPathname }) => {
+              const { pathname } = history.location;
 
-            if (pathname !== nextPathname) {
-              history.push(nextPathname);
+              if (pathname !== nextPathname) {
+                history.push(nextPathname);
+              }
             }
-          }
-        });
+          });
 
-        history.listen(onParentNavigate);
-      });
+          history.listen(onParentNavigate);
+        })
+        .catch(() => {
+          window.location.reload();
+        });
     }
   }, [ready]);
 

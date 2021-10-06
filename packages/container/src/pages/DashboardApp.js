@@ -8,28 +8,32 @@ const DashboardApp = () => {
   const ref = useRef(null);
   const history = useHistory();
   const dashboard = getEnv('dashboard');
-  const [ready, failed] = useDynamicScript(dashboard);
+  const { ready, failed } = useDynamicScript(dashboard);
 
   useEffect(() => {
     if (ready) {
       const remoteApp = getRemoteApp('dashboard', './DashboardApp');
 
-      remoteApp().then((res) => {
-        const mount = res.default;
+      remoteApp()
+        .then((res) => {
+          const mount = res.default;
 
-        const { onParentNavigate } = mount(ref.current, {
-          initialPath: history.location.pathname,
-          onNavigate: ({ pathname: nextPathname }) => {
-            const { pathname } = history.location;
+          const { onParentNavigate } = mount(ref.current, {
+            initialPath: history.location.pathname,
+            onNavigate: ({ pathname: nextPathname }) => {
+              const { pathname } = history.location;
 
-            if (pathname !== nextPathname) {
-              history.push(nextPathname);
+              if (pathname !== nextPathname) {
+                history.push(nextPathname);
+              }
             }
-          }
-        });
+          });
 
-        history.listen(onParentNavigate);
-      });
+          history.listen(onParentNavigate);
+        })
+        .catch(() => {
+          window.location.reload();
+        });
     }
   }, [ready]);
 
